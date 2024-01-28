@@ -9,6 +9,7 @@ import { HouseholdApplicances } from "src/typeorm/entities/property/tags/househo
 import { HouseholdAppliancesDto } from "src/property/dto/household-appliances.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
+import { RentFlatImage } from "src/typeorm/entities/property/images/rent-flat-image.entity";
 
 @Injectable()
 export class RentFlatService {
@@ -19,6 +20,8 @@ export class RentFlatService {
     private readonly addressRepository: Repository<Address>,
     @InjectRepository(HouseholdApplicances)
     private readonly householdApplicancesRepository: Repository<HouseholdApplicances>,
+    @InjectRepository(RentFlatImage)
+    private readonly rentFlatImageRepository: Repository<RentFlatImage>,
     private readonly transactionService: TransactionService,
     private readonly cloudStorageService: CloudStorageService,
   ) {}
@@ -28,30 +31,45 @@ export class RentFlatService {
     createRentFlatDto: CreateRentFlatDto,
     userId: number,
   ) {
-    this.transactionService.transaction(async (queryRunner) => {
-      const address = await queryRunner.manager.save(
-        this.createAddressEntity(createRentFlatDto.address),
-      );
-      const householdApplicances = await queryRunner.manager.save(
-        this.createHouseholdApplicancesEntity(
-          createRentFlatDto.household_appliances,
-        ),
-      );
-      const rentFlat = await queryRunner.manager.save(
-        this.createRentFlatEntity(
-          createRentFlatDto,
+    try {
+      this.transactionService.transaction(async (queryRunner) => {
+        const address = await queryRunner.manager.save(
+          this.createAddressEntity(createRentFlatDto.address),
+        );
+        const householdApplicances = await queryRunner.manager.save(
+          this.createHouseholdApplicancesEntity(
+            createRentFlatDto.household_appliances,
+          ),
+        );
+        const rentFlat = await queryRunner.manager.save(
+          this.createRentFlatEntity(
+            createRentFlatDto,
+            userId,
+            address.id,
+            householdApplicances.id,
+          ),
+        );
+        const imageUrls = await this.cloudStorageService.uploadRentFlatImages(
+          images,
           userId,
-          address.id,
-          householdApplicances.id,
-        ),
-      );
-      const imageUrls = await this.cloudStorageService.uploadRentFlatImages(
-        images,
-        userId,
-        rentFlat.id,
-      );
-      queryRunner.commitTransaction();
-    });
+          rentFlat.id,
+        );
+        await Promise.all(
+          imageUrls.map(async (imageUrl) => {
+            await queryRunner.manager.save(
+              this.createRentFlatImage(imageUrl, rentFlat.id),
+            );
+          }),
+        );
+        queryRunner.commitTransaction();
+        return {
+          ...rentFlat,
+          images: imageUrls,
+        };
+      });
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 
   createAddressEntity(addressDto: AddressDto) {
@@ -62,6 +80,13 @@ export class RentFlatService {
     householdApplicancesDto: HouseholdAppliancesDto,
   ) {
     return this.householdApplicancesRepository.create(householdApplicancesDto);
+  }
+
+  createRentFlatImage(url: string, rentFlatId: number) {
+    return this.rentFlatImageRepository.create({
+      image_url: url,
+      rent_flat_id: rentFlatId,
+    });
   }
 
   createRentFlatEntity(

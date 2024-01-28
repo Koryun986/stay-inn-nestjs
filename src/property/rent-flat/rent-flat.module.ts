@@ -8,11 +8,17 @@ import { Address } from "src/typeorm/entities/property/address.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageModule } from "src/cloud-storage/cloud-storage.module";
+import { RentFlatImage } from "src/typeorm/entities/property/images/rent-flat-image.entity";
 
 @Module({
   imports: [
     JwtServiceModule,
-    TypeOrmModule.forFeature([RentFlat, Address, HouseholdApplicances]),
+    TypeOrmModule.forFeature([
+      RentFlat,
+      Address,
+      HouseholdApplicances,
+      RentFlatImage,
+    ]),
     CloudStorageModule,
   ],
   controllers: [RentFlatController],
