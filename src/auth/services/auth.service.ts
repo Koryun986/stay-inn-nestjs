@@ -53,7 +53,7 @@ export class AuthService {
     });
   }
 
-  async loginUser(userDto: LoginUserDto): Promise<User & JwtTokens> {
+  async loginUser(userDto: LoginUserDto): Promise<UserDto & JwtTokens> {
     const user = await this.userRepository.findOneBy({
       email: userDto.email,
     });
@@ -64,11 +64,15 @@ export class AuthService {
       userDto.password,
       user.password,
     );
+    const avatarUrl = await this.getAvatarUrlById(user.id);
     const refreshToken = await this.jwtTokenServcie.validateRefreshToken(user);
     const accessToken = await this.jwtTokenServcie.gnenerateAccessToken(user);
 
     return {
-      ...user,
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      avatar_url: avatarUrl,
       accessToken,
       refreshToken,
     };
@@ -111,6 +115,11 @@ export class AuthService {
     });
 
     return user;
+  }
+
+  async getAvatarUrlById(userId: number): Promise<string> {
+    const avatar = await this.avatarRepository.findOneBy({ user_id: userId });
+    return avatar.avatar_url;
   }
 
   async hashPassword(password: string): Promise<string> {
