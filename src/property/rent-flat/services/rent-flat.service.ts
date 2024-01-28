@@ -10,6 +10,7 @@ import { HouseholdAppliancesDto } from "src/property/dto/household-appliances.dt
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
 import { RentFlatImage } from "src/typeorm/entities/property/images/rent-flat-image.entity";
+import { CreateRentFlatServiceReturn } from "../types/create-rent-flat-return.type";
 
 @Injectable()
 export class RentFlatService {
@@ -30,9 +31,9 @@ export class RentFlatService {
     images: Array<Express.Multer.File>,
     createRentFlatDto: CreateRentFlatDto,
     userId: number,
-  ) {
+  ): Promise<CreateRentFlatServiceReturn> {
     try {
-      this.transactionService.transaction(async (queryRunner) => {
+      return this.transactionService.transaction(async (queryRunner) => {
         const address = await queryRunner.manager.save(
           this.createAddressEntity(createRentFlatDto.address),
         );
