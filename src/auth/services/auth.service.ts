@@ -14,6 +14,7 @@ import { LoginUserDto } from "../dto/login-user.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { Avatar } from "src/typeorm/entities/avatar.entity";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
+import { UserDto } from "../dto/user.dto";
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
   async registrateUser(
     userDto: CreateUserDto,
     image?: Express.Multer.File,
-  ): Promise<User & JwtTokens & string> {
+  ): Promise<UserDto & JwtTokens & string> {
     await this.validateUserIfExist(userDto);
 
     const user = await this.createUser(userDto);
@@ -42,10 +43,12 @@ export class AuthService {
       await queryRunner.manager.save(avatar);
       await queryRunner.commitTransaction();
       return {
-        ...savedUser,
+        id: savedUser.id,
+        email: savedUser.email,
+        name: savedUser.name,
+        avatar_url: avatar.avatar_url,
         accessToken,
         refreshToken,
-        avatar_url: avatar.avatar_url,
       };
     });
   }

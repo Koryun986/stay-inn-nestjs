@@ -32,5 +32,6 @@ export class RentFlatController {
     request: Request,
   ) {
     const user: User = (request as any).user;
+    const rentFlatWithImages = await this.rentFlatService.createRentFlat(files, createRentFlatDto, user.id);
   }
 }
