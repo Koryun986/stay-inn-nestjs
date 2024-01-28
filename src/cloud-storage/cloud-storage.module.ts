@@ -4,5 +4,6 @@ import { ConfigService } from "@nestjs/config";
 
 @Module({
   providers: [CloudStorageService, ConfigService],
+  exports: [CloudStorageService],
 })
 export class CloudStorageModule {}

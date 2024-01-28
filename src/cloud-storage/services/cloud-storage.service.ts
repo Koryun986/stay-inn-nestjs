@@ -30,15 +30,15 @@ export class CloudStorageService {
     this.storage = getStorage();
   }
 
-  async uploadLodgingImages(
+  async uploadRentFlatImages(
     files: Array<Express.Multer.File>,
     userId: number,
-    lodgingId: number,
-  ): Promise<string[]> {
+    rentFlatId: number,
+  ) {
     try {
       const folderName = `${this.configService.get<string>(
-        "firebase.storageLodgingFolder",
-      )}/user_${userId}/lodging_${lodgingId}`;
+        "firebase.storageRentFlatFolder",
+      )}/user_${userId}/rent_flat_${rentFlatId}`;
       const downloadUrls = await this.uploadFilesToBucket(files, folderName);
       return downloadUrls;
     } catch (e) {
