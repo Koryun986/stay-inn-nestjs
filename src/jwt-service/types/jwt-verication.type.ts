@@ -1,5 +1,5 @@
-import { User } from "src/typeorm/entities/user.entity";
+import { UserDto } from "src/auth/dto/user.dto";
 
 export type JwtVerificationResult = {
-  payload: User;
+  payload: UserDto;
 };

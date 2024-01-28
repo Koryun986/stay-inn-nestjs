@@ -5,8 +5,8 @@ import {
   Injectable,
 } from "@nestjs/common";
 import { Request } from "express";
+import { UserDto } from "src/auth/dto/user.dto";
 import { JwtTokenService } from "src/jwt-service/service/jwt.service";
-import { User } from "src/typeorm/entities/user.entity";
 import { AuthUtils } from "src/utils/auth/auth.utils";
 
 @Injectable()
@@ -17,9 +17,9 @@ export class AuthGuard implements CanActivate {
     try {
       const request: Request = context.switchToHttp().getRequest();
       const accessToken = AuthUtils.getAccessTokenFromRequest(request);
-      const user: User =
+      const userDto: UserDto =
         await this.jwtTokenService.validateAccessToken(accessToken);
-      return !!user;
+      return !!userDto;
     } catch (e) {
       throw new ForbiddenException(e.message);
     }

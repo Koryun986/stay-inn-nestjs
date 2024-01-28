@@ -7,10 +7,10 @@ import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
 import { add, isFuture, isPast } from "date-fns";
+import { UserDto } from "src/auth/dto/user.dto";
 import { JwtTokens } from "src/jwt-service/types/jwt-token.type";
 import { JwtVerificationResult } from "src/jwt-service/types/jwt-verication.type";
 import { Token } from "src/typeorm/entities/token.entity";
-import { User } from "src/typeorm/entities/user.entity";
 import { Repository } from "typeorm";
 import { v4 } from "uuid";
 
@@ -23,7 +23,7 @@ export class JwtTokenService {
     private readonly configService: ConfigService,
   ) {}
 
-  async generateTokens(payload: User): Promise<JwtTokens> {
+  async generateTokens(payload: UserDto): Promise<JwtTokens> {
     console.log(payload);
 
     const accessToken = await this.gnenerateAccessToken(payload);
@@ -39,7 +39,7 @@ export class JwtTokenService {
     };
   }
 
-  async gnenerateAccessToken(payload: User) {
+  async gnenerateAccessToken(payload: UserDto) {
     return await this.jwtService.signAsync(
       { payload },
       {
@@ -49,7 +49,7 @@ export class JwtTokenService {
     );
   }
 
-  async validateRefreshToken(payload: User) {
+  async validateRefreshToken(payload: UserDto) {
     const token = await this.getRefreshTokenFromUser(payload);
     if (isPast(Date.parse(token.expiration.toString()))) {
       token.expiration = this.createExpiration();
@@ -58,9 +58,9 @@ export class JwtTokenService {
     return token;
   }
 
-  async getRefreshTokenFromUser(user: User): Promise<Token> {
+  async getRefreshTokenFromUser(user: UserDto): Promise<Token> {
     return await this.tokenRepository.findOneBy({
-      user: user,
+      user_id: user.id,
     });
   }
 
@@ -68,7 +68,7 @@ export class JwtTokenService {
     return isFuture(Date.parse(token.expiration.toString()));
   }
 
-  async validateAccessToken(token: string): Promise<User> {
+  async validateAccessToken(token: string): Promise<UserDto> {
     try {
       const data: JwtVerificationResult = await this.jwtService.verifyAsync(
         token,
@@ -85,7 +85,7 @@ export class JwtTokenService {
   async isTokensBelongsToOneUser(
     accessToken: string,
     refreshToken: string,
-  ): Promise<User> {
+  ): Promise<UserDto> {
     const userFromAccessToken = await this.validateAccessToken(accessToken);
     const userIdFromAccessToken = userFromAccessToken.id;
     const tokenFromRefreshToken = await this.tokenRepository.findOneBy({
@@ -98,7 +98,7 @@ export class JwtTokenService {
     return userFromAccessToken;
   }
 
-  private async generateRefreshToken(payload: User) {
+  private async generateRefreshToken(payload: UserDto) {
     const token = this.tokenRepository.create({
       token: v4(),
       expiration: this.createExpiration(),

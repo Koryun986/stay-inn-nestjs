@@ -14,7 +14,7 @@ import {
   CreateRentFlatDto,
   createRentFlatSchema,
 } from "../dto/create-rent-flat.dto";
-import { User } from "src/typeorm/entities/user.entity";
+import { UserDto } from "src/auth/dto/user.dto";
 
 @Controller("rent-flat")
 export class RentFlatController {
@@ -31,7 +31,11 @@ export class RentFlatController {
     @Req()
     request: Request,
   ) {
-    const user: User = (request as any).user;
-    const rentFlatWithImages = await this.rentFlatService.createRentFlat(files, createRentFlatDto, user.id);
+    const user: UserDto = (request as any).user_dto;
+    const rentFlatWithImages = await this.rentFlatService.createRentFlat(
+      files,
+      createRentFlatDto,
+      user.id,
+    );
   }
 }

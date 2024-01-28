@@ -37,7 +37,10 @@ export class AuthService {
       const savedUser = await queryRunner.manager.save(user);
       const avatar = await this.createAvatar(savedUser.id, image);
       const { accessToken, refreshToken } =
-        await this.jwtTokenServcie.generateTokens(user);
+        await this.jwtTokenServcie.generateTokens({
+          ...user,
+          avatar_url: avatar.avatar_url,
+        });
       refreshToken.user_id = savedUser.id;
       await queryRunner.manager.save(refreshToken);
       await queryRunner.manager.save(avatar);
@@ -65,8 +68,14 @@ export class AuthService {
       user.password,
     );
     const avatarUrl = await this.getAvatarUrlById(user.id);
-    const refreshToken = await this.jwtTokenServcie.validateRefreshToken(user);
-    const accessToken = await this.jwtTokenServcie.gnenerateAccessToken(user);
+    const refreshToken = await this.jwtTokenServcie.validateRefreshToken({
+      ...user,
+      avatar_url: avatarUrl,
+    });
+    const accessToken = await this.jwtTokenServcie.gnenerateAccessToken({
+      ...user,
+      avatar_url: avatarUrl,
+    });
 
     return {
       id: user.id,
@@ -91,8 +100,8 @@ export class AuthService {
     return newAccessToken;
   }
 
-  async isUsersRefreshTokenExpires(user: User) {
-    const token = await this.jwtTokenServcie.getRefreshTokenFromUser(user);
+  async isUsersRefreshTokenExpires(userDto: UserDto) {
+    const token = await this.jwtTokenServcie.getRefreshTokenFromUser(userDto);
     const isValid = await this.jwtTokenServcie.isValideRefreshToken(token);
     return !isValid;
   }

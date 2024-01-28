@@ -20,8 +20,9 @@ export class UserInterceptor implements NestInterceptor {
     const accessToken = AuthUtils.getAccessTokenFromRequest(request);
 
     if (accessToken) {
-      const user = await this.jwtTokenService.validateAccessToken(accessToken);
-      request.user = user;
+      const userDto =
+        await this.jwtTokenService.validateAccessToken(accessToken);
+      request.user_dto = userDto;
     }
 
     return next.handle();
