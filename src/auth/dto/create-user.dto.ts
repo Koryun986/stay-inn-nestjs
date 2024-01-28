@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { userSchema } from "./user.dto";
+import { loginUserSchema } from "./login-user.dto";
 
-export const createUserSchema = userSchema.extend({
+export const createUserSchema = loginUserSchema.extend({
   name: z.string().nonempty("Name is required"),
 });
 

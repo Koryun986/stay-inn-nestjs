@@ -10,7 +10,7 @@ import { Repository } from "typeorm";
 import { CreateUserDto } from "src/auth/dto/create-user.dto";
 import { JwtTokenService } from "src/jwt-service/service/jwt.service";
 import { JwtTokens } from "src/jwt-service/types/jwt-token.type";
-import { UserDto } from "../dto/user.dto";
+import { LoginUserDto } from "../dto/login-user.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { Avatar } from "src/typeorm/entities/avatar.entity";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
@@ -32,13 +32,13 @@ export class AuthService {
     await this.validateUserIfExist(userDto);
 
     const user = await this.createUser(userDto);
-    const { accessToken, refreshToken } =
-      await this.jwtTokenServcie.generateTokens(user);
     return this.transactionService.transaction(async (queryRunner) => {
       const savedUser = await queryRunner.manager.save(user);
+      const avatar = await this.createAvatar(savedUser.id, image);
+      const { accessToken, refreshToken } =
+        await this.jwtTokenServcie.generateTokens(user);
       refreshToken.user_id = savedUser.id;
       await queryRunner.manager.save(refreshToken);
-      const avatar = await this.createAvatar(savedUser.id, image);
       await queryRunner.manager.save(avatar);
       await queryRunner.commitTransaction();
       return {
@@ -50,7 +50,7 @@ export class AuthService {
     });
   }
 
-  async loginUser(userDto: UserDto): Promise<User & JwtTokens> {
+  async loginUser(userDto: LoginUserDto): Promise<User & JwtTokens> {
     const user = await this.userRepository.findOneBy({
       email: userDto.email,
     });

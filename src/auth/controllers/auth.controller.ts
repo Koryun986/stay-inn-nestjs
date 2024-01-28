@@ -13,13 +13,10 @@ import { ZodValidationPipe } from "src/pipes/zod-validation.pipe";
 import { AuthService } from "../services/auth.service";
 import { createUserSchema, CreateUserDto } from "../dto/create-user.dto";
 import { Request, Response, CookieOptions } from "express";
-import { ConfigService } from "@nestjs/config";
 import { COOKIE_REFRESH_TOKEN } from "../constants/cookie.constants";
-import { UserDto, userSchema } from "../dto/user.dto";
+import { LoginUserDto, loginUserSchema } from "../dto/login-user.dto";
 import { AuthUtils } from "src/utils/auth/auth.utils";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { diskStorage } from "multer";
-import { extname } from "path";
 
 @Controller("auth")
 export class AuthController {
@@ -28,10 +25,7 @@ export class AuthController {
     httpOnly: true,
   };
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly configService: ConfigService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post("registration")
   @UseInterceptors(FileInterceptor("file"))
@@ -57,8 +51,8 @@ export class AuthController {
   }
 
   @Post("login")
-  @UsePipes(new ZodValidationPipe(userSchema))
-  async loginUser(@Body() userDto: UserDto, @Res() resposne: Response) {
+  @UsePipes(new ZodValidationPipe(loginUserSchema))
+  async loginUser(@Body() userDto: LoginUserDto, @Res() resposne: Response) {
     const user = await this.authService.loginUser(userDto);
     resposne.cookie(
       COOKIE_REFRESH_TOKEN,
