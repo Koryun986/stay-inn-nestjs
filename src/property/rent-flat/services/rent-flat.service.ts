@@ -11,6 +11,8 @@ import { TransactionService } from "src/database-transaction/transaction.service
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
 import { RentFlatImage } from "src/typeorm/entities/property/images/rent-flat-image.entity";
 import { CreateRentFlatServiceReturn } from "../types/create-rent-flat-return.type";
+import { FlatTagDto } from "../dto/flat-tag.dto";
+import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
 
 @Injectable()
 export class RentFlatService {
@@ -19,6 +21,8 @@ export class RentFlatService {
     private readonly rentFlatRepository: Repository<RentFlat>,
     @InjectRepository(Address)
     private readonly addressRepository: Repository<Address>,
+    @InjectRepository(FlatTag)
+    private readonly flatTagRepository: Repository<FlatTag>,
     @InjectRepository(HouseholdApplicances)
     private readonly householdApplicancesRepository: Repository<HouseholdApplicances>,
     @InjectRepository(RentFlatImage)
@@ -39,7 +43,13 @@ export class RentFlatService {
         );
         const householdApplicances = await queryRunner.manager.save(
           this.createHouseholdApplicancesEntity(
-            createRentFlatDto.household_appliances,
+            createRentFlatDto.flat_tag.household_appliances,
+          ),
+        );
+        const flatTag = await queryRunner.manager.save(
+          this.createFlatTagEntity(
+            createRentFlatDto.flat_tag,
+            householdApplicances.id,
           ),
         );
         const rentFlat = await queryRunner.manager.save(
@@ -47,7 +57,7 @@ export class RentFlatService {
             createRentFlatDto,
             userId,
             address.id,
-            householdApplicances.id,
+            flatTag.id,
           ),
         );
         const imageUrls = await this.cloudStorageService.uploadRentFlatImages(
@@ -83,6 +93,13 @@ export class RentFlatService {
     return this.householdApplicancesRepository.create(householdApplicancesDto);
   }
 
+  createFlatTagEntity(flatTagDto: FlatTagDto, householdAppliancesId: number) {
+    return this.flatTagRepository.create({
+      ...flatTagDto,
+      household_appliances_id: householdAppliancesId,
+    });
+  }
+
   createRentFlatImage(url: string, rentFlatId: number) {
     return this.rentFlatImageRepository.create({
       image_url: url,
@@ -94,7 +111,7 @@ export class RentFlatService {
     createRentFlatDto: CreateRentFlatDto,
     userId: number,
     addressId: number,
-    householdAppliancesId: number,
+    flatTagId: number,
   ) {
     return this.rentFlatRepository.create({
       price: createRentFlatDto.price,
@@ -102,7 +119,7 @@ export class RentFlatService {
       description: createRentFlatDto.description,
       user_id: userId,
       address_id: addressId,
-      household_appliances_id: householdAppliancesId,
+      flat_tag_id: flatTagId,
     });
   }
 }

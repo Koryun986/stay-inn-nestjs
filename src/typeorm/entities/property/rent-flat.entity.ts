@@ -1,7 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from "./address.entity";
 import { User } from "../user.entity";
-import { HouseholdApplicances } from "./tags/household-appliances.entity";
+import { FlatTag } from "./tags/flat-tag.entity";
 
 @Entity()
 export class RentFlat {
@@ -35,11 +35,11 @@ export class RentFlat {
   })
   address_id: number;
 
-  @OneToOne(() => HouseholdApplicances)
-  household_appliances: HouseholdApplicances;
+  @OneToOne(() => FlatTag)
+  flat_tag: FlatTag;
 
   @Column({
     type: "bigint",
   })
-  household_appliances_id: number;
+  flat_tag_id: number;
 }

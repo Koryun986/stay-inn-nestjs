@@ -1,8 +1,8 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HouseholdApplicances } from "./household-appliances.entity";
 import { Amenities } from "./amenities.entity";
-import compareAsc from "date-fns/compareAsc";
 import { Communication } from "./communication.entity";
+import { Furniture, FurnitureEnum, Repair, RepairEnum } from "./enum/tag.enum";
 
 type HouseType = "Townhouse" | "House" | "Country House";
 type Condition = "Constructed" | "Unfinished";
@@ -13,14 +13,6 @@ type BuildingType =
   | "brick"
   | "cassette"
   | "wooden";
-type Furniture = "Exist" | "Not Exist" | "Partial Furniture" | "By Agreement";
-type Repair =
-  | "Old Repair"
-  | "Partial Repair"
-  | "Cosmetic Repair"
-  | "Euro-renovated"
-  | "Renovated In Designer Style"
-  | "Thoroughly Reconstructed";
 
 @Entity()
 export class HouseTag {
@@ -73,22 +65,27 @@ export class HouseTag {
 
   @Column({
     type: "enum",
-    enum: ["Exist", "Not Exist", "Partial Furniture", "By Agreement"],
-    default: "Exist",
+    enum: [
+      FurnitureEnum.Exist,
+      FurnitureEnum.NotExist,
+      FurnitureEnum.PartialFurniture,
+      FurnitureEnum.ByAgreement,
+    ],
+    default: FurnitureEnum.Exist,
   })
   furniture: Furniture;
 
   @Column({
     type: "enum",
     enum: [
-      "Old Repair",
-      "Partial Repair",
-      "Cosmetic Repair",
-      "Euro-renovated",
-      "Renovated In Designer Style",
-      "Thoroughly Reconstructed",
+      RepairEnum.OldRepair,
+      RepairEnum.PartialRepair,
+      RepairEnum.CosmeticRepair,
+      RepairEnum.EuroRenovated,
+      RepairEnum.DesignerStyle,
+      RepairEnum.Reconstructed,
     ],
-    default: "Thoroughly Reconstructed",
+    default: RepairEnum.Reconstructed,
   })
   repair: Repair;
 

@@ -1,7 +1,6 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "../user.entity";
 import { Address } from "./address.entity";
-import { HouseholdApplicances } from "./tags/household-appliances.entity";
 import { HouseTag } from "./tags/house-tag.entity";
 
 @Entity()

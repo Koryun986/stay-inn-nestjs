@@ -37,5 +37,9 @@ export class RentFlatController {
       createRentFlatDto,
       user.id,
     );
+    return {
+      ...rentFlatWithImages,
+      user,
+    };
   }
 }

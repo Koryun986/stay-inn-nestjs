@@ -1,5 +1,6 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HouseholdApplicances } from "./household-appliances.entity";
+import { Furniture, FurnitureEnum, Repair, RepairEnum } from "./enum/tag.enum";
 
 @Entity()
 export class FlatTag {
@@ -9,7 +10,7 @@ export class FlatTag {
   id: number;
 
   @Column()
-  area: number;
+  area?: number;
 
   @Column()
   floor: number;
@@ -18,7 +19,7 @@ export class FlatTag {
   rooms: number;
 
   @Column()
-  ceiling_height: number;
+  ceiling_height?: number;
 
   @Column()
   bathrooms: number;
@@ -26,11 +27,31 @@ export class FlatTag {
   @Column()
   balconies: number;
 
-  @Column()
-  furniture: number;
+  @Column({
+    type: "enum",
+    enum: [
+      FurnitureEnum.Exist,
+      FurnitureEnum.NotExist,
+      FurnitureEnum.PartialFurniture,
+      FurnitureEnum.ByAgreement,
+    ],
+    default: FurnitureEnum.Exist,
+  })
+  furniture: Furniture;
 
-  @Column()
-  repair: string;
+  @Column({
+    type: "enum",
+    enum: [
+      RepairEnum.OldRepair,
+      RepairEnum.PartialRepair,
+      RepairEnum.CosmeticRepair,
+      RepairEnum.EuroRenovated,
+      RepairEnum.DesignerStyle,
+      RepairEnum.Reconstructed,
+    ],
+    default: RepairEnum.Reconstructed,
+  })
+  repair: Repair;
 
   @Column()
   elevator: boolean;

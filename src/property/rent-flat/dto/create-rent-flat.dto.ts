@@ -1,6 +1,6 @@
 import { addressSchema } from "src/property/dto/address.dto";
-import { householdAppliancesSchema } from "src/property/dto/household-appliances.dto";
 import { z } from "zod";
+import { flatTagSchema } from "./flat-tag.dto";
 
 export const createRentFlatSchema = z
   .object({
@@ -10,7 +10,7 @@ export const createRentFlatSchema = z
       .string({ required_error: "Description is required" })
       .nonempty(),
     address: addressSchema,
-    household_appliances: householdAppliancesSchema,
+    flat_tag: flatTagSchema,
   })
   .required();
 
