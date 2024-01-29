@@ -15,4 +15,4 @@ export const communicationSchema = z
   })
   .required();
 
-export type Communication = z.infer<typeof communicationSchema>;
+export type CommunicationDto = z.infer<typeof communicationSchema>;

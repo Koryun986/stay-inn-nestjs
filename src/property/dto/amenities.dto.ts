@@ -21,4 +21,4 @@ export const amenitiesSchema = z
   })
   .required();
 
-export type Amenitites = z.infer<typeof amenitiesSchema>;
+export type AmenititesDto = z.infer<typeof amenitiesSchema>;
