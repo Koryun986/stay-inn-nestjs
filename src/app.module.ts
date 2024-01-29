@@ -13,6 +13,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { GraphQLConfigService } from "./graphql/graphql.config";
 import { GraphQLResolverModule } from "./graphql/graphql.module";
 import { RentFlatModule } from './property/rent-flat/rent-flat.module';
+import { RentHouseModule } from './property/rent-house/rent-house.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { RentFlatModule } from './property/rent-flat/rent-flat.module';
     CloudStorageModule,
     GraphQLResolverModule,
     RentFlatModule,
+    RentHouseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
