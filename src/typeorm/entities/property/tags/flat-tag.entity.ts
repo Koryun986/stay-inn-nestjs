@@ -1,6 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HouseholdApplicances } from "./household-appliances.entity";
-import { Furniture, FurnitureEnum, Repair, RepairEnum } from "./enum/tag.enum";
+import { FurnitureEnum, RepairEnum } from "./enum/tag.enum";
+import { Furniture, Repair } from "./types/tag.type";
 
 @Entity()
 export class FlatTag {

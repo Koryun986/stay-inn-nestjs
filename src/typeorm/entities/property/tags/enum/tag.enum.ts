@@ -14,16 +14,22 @@ export enum RepairEnum {
   Reconstructed = "Thoroughly Reconstructed",
 }
 
-export type Furniture =
-  | "Exist"
-  | "Not Exist"
-  | "Partial Furniture"
-  | "By Agreement";
+export enum BuildingTypeEnum {
+  Stone = "Stone",
+  Panel = "Panel",
+  Monolith = "Monolith",
+  Brick = "Brick",
+  Cassette = "Cassette",
+  Wooden = "Wooden",
+}
 
-export type Repair =
-  | "Old Repair"
-  | "Partial Repair"
-  | "Cosmetic Repair"
-  | "Euro-renovated"
-  | "Renovated In Designer Style"
-  | "Thoroughly Reconstructed";
+export enum HouseTypeEnum {
+  Townhouse = "Townhouse",
+  House = "House",
+  CountryHouse = "Country House",
+}
+
+export enum ConditionTypeEnum {
+  Constructed = "Constructed",
+  Unfinished = "Unfinished",
+}
