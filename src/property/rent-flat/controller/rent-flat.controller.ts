@@ -15,6 +15,7 @@ import {
   createRentFlatSchema,
 } from "../dto/create-rent-flat.dto";
 import { UserDto } from "src/auth/dto/user.dto";
+import { CreateRentFlatControllerReturn } from "../types/create-rent-flat-return.type";
 
 @Controller("rent-flat")
 export class RentFlatController {
@@ -30,7 +31,7 @@ export class RentFlatController {
     createRentFlatDto: CreateRentFlatDto,
     @Req()
     request: Request,
-  ) {
+  ): Promise<CreateRentFlatControllerReturn> {
     const user: UserDto = (request as any).user_dto;
     const rentFlatWithImages = await this.rentFlatService.createRentFlat(
       files,

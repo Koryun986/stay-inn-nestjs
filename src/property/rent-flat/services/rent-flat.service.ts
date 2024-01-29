@@ -74,7 +74,8 @@ export class RentFlatService {
         );
         queryRunner.commitTransaction();
         return {
-          ...rentFlat,
+          ...createRentFlatDto,
+          id: rentFlat.id,
           images: imageUrls,
         };
       });

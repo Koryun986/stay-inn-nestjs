@@ -1,7 +1,10 @@
 import { UserDto } from "src/auth/dto/user.dto";
-import { RentFlat } from "src/typeorm/entities/property/rent-flat.entity";
+import { CreateRentFlatDto } from "../dto/create-rent-flat.dto";
 
-export type CreateRentFlatServiceReturn = RentFlat & { images: string[] };
+export type CreateRentFlatServiceReturn = CreateRentFlatDto & {
+  images: string[];
+  id: number;
+};
 
 export type CreateRentFlatControllerReturn = CreateRentFlatServiceReturn & {
   user: UserDto;
