@@ -15,6 +15,7 @@ import {
   createRentHouseSchema,
 } from "../dto/create-rent-house.dto";
 import { UserDto } from "src/auth/dto/user.dto";
+import { CreateRentFlatControllerReturn } from "src/property/rent-flat/types/create-rent-flat-return.type";
 
 @Controller("rent-house")
 export class RentHouseController {
@@ -28,8 +29,17 @@ export class RentHouseController {
     files: Array<Express.Multer.File>,
     @Body(new ZodValidationPipe(createRentHouseSchema))
     createRentHouseDto: CreateRentHouseDto,
-    @Req() request: Request
-  ) { 
+    @Req() request: Request,
+  ): Promise<CreateRentFlatControllerReturn> {
     const user: UserDto = (request as any).user_dto;
+    const rentHouseWithImages = await this.rentHouseService.createRentHouse(
+      files,
+      createRentHouseDto,
+      user.id,
+    );
+    return {
+      ...rentHouseWithImages,
+      user,
+    };
   }
 }
