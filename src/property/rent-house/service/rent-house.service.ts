@@ -15,6 +15,7 @@ import { CommunicationDto } from "src/property/dto/communication.dto";
 import { AmenititesDto } from "src/property/dto/amenities.dto";
 import { HouseholdAppliancesDto } from "src/property/dto/household-appliances.dto";
 import { HouseTagDto } from "../dto/house-tag.dto";
+import { CreateRentHouseServiceReturn } from "../types/create-rent-house-return.type";
 
 @Injectable()
 export class RentHouseService {
@@ -42,7 +43,7 @@ export class RentHouseService {
     images: Array<Express.Multer.File>,
     createRentHouseDto: CreateRentHouseDto,
     userId: number,
-  ) {
+  ): Promise<CreateRentHouseServiceReturn> {
     try {
       return this.transactionService.transaction(async (queryRunner) => {
         const communication = await queryRunner.manager.save(
@@ -69,7 +70,24 @@ export class RentHouseService {
         const rentHouse = await queryRunner.manager.save(
           this.createRentHouseEntity(createRentHouseDto, houseTag.id),
         );
+        const imageUrls = await this.cloudStorageService.uploadRentHouseImages(
+          images,
+          userId,
+          rentHouse.id,
+        );
+        await Promise.all(
+          imageUrls.map(async (imageUrl) => {
+            await queryRunner.manager.save(
+              this.createRentHouseImageEntity(imageUrl, rentHouse.id),
+            );
+          }),
+        );
         queryRunner.commitTransaction();
+        return {
+          ...createRentHouseDto,
+          id: rentHouse.id,
+          images: imageUrls,
+        };
       });
     } catch (e) {
       throw new Error(e);
