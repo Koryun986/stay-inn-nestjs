@@ -4,7 +4,7 @@ import { UserEntity } from "../user.entity";
 import { FlatTag } from "./tags/flat-tag.entity";
 
 @Entity()
-export class RentFlat {
+export class RentFlatEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })

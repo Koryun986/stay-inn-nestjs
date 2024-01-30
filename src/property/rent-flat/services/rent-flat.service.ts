@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateRentFlatDto } from "../dto/create-rent-flat.dto";
-import { RentFlat } from "src/typeorm/entities/property/rent-flat.entity";
+import { RentFlatEntity } from "src/typeorm/entities/property/rent-flat.entity";
 import { Repository } from "typeorm";
 import { AddressDto } from "src/property/dto/address.dto";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
@@ -17,8 +17,8 @@ import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
 @Injectable()
 export class RentFlatService {
   constructor(
-    @InjectRepository(RentFlat)
-    private readonly rentFlatRepository: Repository<RentFlat>,
+    @InjectRepository(RentFlatEntity)
+    private readonly rentFlatRepository: Repository<RentFlatEntity>,
     @InjectRepository(AddressEntity)
     private readonly addressRepository: Repository<AddressEntity>,
     @InjectRepository(FlatTag)
