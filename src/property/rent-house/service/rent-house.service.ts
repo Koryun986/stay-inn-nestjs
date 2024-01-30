@@ -5,7 +5,7 @@ import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity
 import { Repository } from "typeorm";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { HouseTagEntity } from "src/typeorm/entities/property/tags/house-tag.entity";
-import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
+import { HouseholdApplicancesEntity } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
 import { CommunicationEntity } from "src/typeorm/entities/property/tags/communication.entity";
 import { RentHouseImageEntity } from "src/typeorm/entities/property/images/rent-house-image.entity";
@@ -26,8 +26,8 @@ export class RentHouseService {
     private readonly addressRepository: Repository<AddressEntity>,
     @InjectRepository(HouseTagEntity)
     private readonly houseTagRepository: Repository<HouseTagEntity>,
-    @InjectRepository(HouseholdApplicances)
-    private readonly householdAppliancesRepository: Repository<HouseholdApplicances>,
+    @InjectRepository(HouseholdApplicancesEntity)
+    private readonly householdAppliancesRepository: Repository<HouseholdApplicancesEntity>,
     @InjectRepository(AmenitiesEntity)
     private readonly amenitiesRepository: Repository<AmenitiesEntity>,
     @InjectRepository(CommunicationEntity)

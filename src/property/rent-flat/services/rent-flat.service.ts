@@ -5,7 +5,7 @@ import { RentFlatEntity } from "src/typeorm/entities/property/rent-flat.entity";
 import { Repository } from "typeorm";
 import { AddressDto } from "src/property/dto/address.dto";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
-import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
+import { HouseholdApplicancesEntity } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { HouseholdAppliancesDto } from "src/property/dto/household-appliances.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
@@ -23,8 +23,8 @@ export class RentFlatService {
     private readonly addressRepository: Repository<AddressEntity>,
     @InjectRepository(FlatTagEntity)
     private readonly flatTagRepository: Repository<FlatTagEntity>,
-    @InjectRepository(HouseholdApplicances)
-    private readonly householdApplicancesRepository: Repository<HouseholdApplicances>,
+    @InjectRepository(HouseholdApplicancesEntity)
+    private readonly householdApplicancesRepository: Repository<HouseholdApplicancesEntity>,
     @InjectRepository(RentFlatImageEntity)
     private readonly rentFlatImageRepository: Repository<RentFlatImageEntity>,
     private readonly transactionService: TransactionService,

@@ -1,5 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { HouseholdApplicances } from "./household-appliances.entity";
+import { HouseholdApplicancesEntity } from "./household-appliances.entity";
 import { AmenitiesEntity } from "./amenities.entity";
 import { CommunicationEntity } from "./communication.entity";
 import {
@@ -103,8 +103,8 @@ export class HouseTagEntity {
   })
   repair: Repair;
 
-  @OneToOne(() => HouseholdApplicances)
-  household_appliances: HouseholdApplicances;
+  @OneToOne(() => HouseholdApplicancesEntity)
+  household_appliances: HouseholdApplicancesEntity;
 
   @Column({
     type: "bigint",
