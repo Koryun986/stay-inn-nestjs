@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { RentHouseService } from "./service/rent-house.service";
 import { RentHouseController } from "./controller/rent-house.controller";
 import { JwtServiceModule } from "src/jwt-service/jwt-service.module";
-import { HouseTag } from "src/typeorm/entities/property/tags/house-tag.entity";
+import { HouseTagEntity } from "src/typeorm/entities/property/tags/house-tag.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CloudStorageModule } from "src/cloud-storage/cloud-storage.module";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
@@ -19,7 +19,7 @@ import { TransactionService } from "src/database-transaction/transaction.service
     TypeOrmModule.forFeature([
       RentHouseEntity,
       AddressEntity,
-      HouseTag,
+      HouseTagEntity,
       HouseholdApplicances,
       AmenitiesEntity,
       CommunicationEntity,

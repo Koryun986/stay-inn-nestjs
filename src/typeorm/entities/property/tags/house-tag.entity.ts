@@ -18,7 +18,7 @@ import {
 } from "./types/tag.type";
 
 @Entity()
-export class HouseTag {
+export class HouseTagEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
