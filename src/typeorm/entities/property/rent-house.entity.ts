@@ -4,7 +4,7 @@ import { AddressEntity } from "./address.entity";
 import { HouseTag } from "./tags/house-tag.entity";
 
 @Entity()
-export class RentHouse {
+export class RentHouseEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })

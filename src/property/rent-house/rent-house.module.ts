@@ -7,7 +7,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { CloudStorageModule } from "src/cloud-storage/cloud-storage.module";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { RentHouseImage } from "src/typeorm/entities/property/images/rent-house-image.entity";
-import { RentHouse } from "src/typeorm/entities/property/rent-house.entity";
+import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { Amenities } from "src/typeorm/entities/property/tags/amenities.entity";
 import { Communication } from "src/typeorm/entities/property/tags/communication.entity";
@@ -17,7 +17,7 @@ import { TransactionService } from "src/database-transaction/transaction.service
   imports: [
     JwtServiceModule,
     TypeOrmModule.forFeature([
-      RentHouse,
+      RentHouseEntity,
       AddressEntity,
       HouseTag,
       HouseholdApplicances,
