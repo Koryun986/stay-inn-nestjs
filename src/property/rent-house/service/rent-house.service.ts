@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { HouseTag } from "src/typeorm/entities/property/tags/house-tag.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
-import { Amenities } from "src/typeorm/entities/property/tags/amenities.entity";
+import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
 import { Communication } from "src/typeorm/entities/property/tags/communication.entity";
 import { RentHouseImageEntity } from "src/typeorm/entities/property/images/rent-house-image.entity";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
@@ -28,8 +28,8 @@ export class RentHouseService {
     private readonly houseTagRepository: Repository<HouseTag>,
     @InjectRepository(HouseholdApplicances)
     private readonly householdAppliancesRepository: Repository<HouseholdApplicances>,
-    @InjectRepository(Amenities)
-    private readonly amenitiesRepository: Repository<Amenities>,
+    @InjectRepository(AmenitiesEntity)
+    private readonly amenitiesRepository: Repository<AmenitiesEntity>,
     @InjectRepository(Communication)
     private readonly communicationRepository: Repository<Communication>,
     @InjectRepository(RentHouseImageEntity)

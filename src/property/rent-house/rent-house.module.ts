@@ -9,7 +9,7 @@ import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { RentHouseImageEntity } from "src/typeorm/entities/property/images/rent-house-image.entity";
 import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
-import { Amenities } from "src/typeorm/entities/property/tags/amenities.entity";
+import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
 import { Communication } from "src/typeorm/entities/property/tags/communication.entity";
 import { TransactionService } from "src/database-transaction/transaction.service";
 
@@ -21,7 +21,7 @@ import { TransactionService } from "src/database-transaction/transaction.service
       AddressEntity,
       HouseTag,
       HouseholdApplicances,
-      Amenities,
+      AmenitiesEntity,
       Communication,
       RentHouseImageEntity,
     ]),

@@ -1,6 +1,6 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HouseholdApplicances } from "./household-appliances.entity";
-import { Amenities } from "./amenities.entity";
+import { AmenitiesEntity } from "./amenities.entity";
 import { Communication } from "./communication.entity";
 import {
   BuildingTypeEnum,
@@ -111,8 +111,8 @@ export class HouseTag {
   })
   household_appliances_id: number;
 
-  @OneToOne(() => Amenities)
-  amenities: Amenities;
+  @OneToOne(() => AmenitiesEntity)
+  amenities: AmenitiesEntity;
 
   @Column({
     type: "bigint",
