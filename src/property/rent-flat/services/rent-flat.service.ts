@@ -4,7 +4,7 @@ import { CreateRentFlatDto } from "../dto/create-rent-flat.dto";
 import { RentFlat } from "src/typeorm/entities/property/rent-flat.entity";
 import { Repository } from "typeorm";
 import { AddressDto } from "src/property/dto/address.dto";
-import { Address } from "src/typeorm/entities/property/address.entity";
+import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { HouseholdAppliancesDto } from "src/property/dto/household-appliances.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
@@ -19,8 +19,8 @@ export class RentFlatService {
   constructor(
     @InjectRepository(RentFlat)
     private readonly rentFlatRepository: Repository<RentFlat>,
-    @InjectRepository(Address)
-    private readonly addressRepository: Repository<Address>,
+    @InjectRepository(AddressEntity)
+    private readonly addressRepository: Repository<AddressEntity>,
     @InjectRepository(FlatTag)
     private readonly flatTagRepository: Repository<FlatTag>,
     @InjectRepository(HouseholdApplicances)

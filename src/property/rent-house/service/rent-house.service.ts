@@ -3,7 +3,7 @@ import { CreateRentHouseDto } from "../dto/create-rent-house.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { RentHouse } from "src/typeorm/entities/property/rent-house.entity";
 import { Repository } from "typeorm";
-import { Address } from "src/typeorm/entities/property/address.entity";
+import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { HouseTag } from "src/typeorm/entities/property/tags/house-tag.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { Amenities } from "src/typeorm/entities/property/tags/amenities.entity";
@@ -22,8 +22,8 @@ export class RentHouseService {
   constructor(
     @InjectRepository(RentHouse)
     private readonly rentHouseRepository: Repository<RentHouse>,
-    @InjectRepository(Address)
-    private readonly addressRepository: Repository<Address>,
+    @InjectRepository(AddressEntity)
+    private readonly addressRepository: Repository<AddressEntity>,
     @InjectRepository(HouseTag)
     private readonly houseTagRepository: Repository<HouseTag>,
     @InjectRepository(HouseholdApplicances)
