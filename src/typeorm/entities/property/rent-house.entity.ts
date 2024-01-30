@@ -1,5 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "../user.entity";
+import { UserEntity } from "../user.entity";
 import { Address } from "./address.entity";
 import { HouseTag } from "./tags/house-tag.entity";
 
@@ -21,8 +21,8 @@ export class RentHouse {
   })
   description: string;
 
-  @OneToOne(() => User)
-  user: User;
+  @OneToOne(() => UserEntity)
+  user: UserEntity;
 
   @Column({
     type: "bigint",

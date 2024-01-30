@@ -5,7 +5,7 @@ import {
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import * as bcrypt from "bcrypt";
-import { User } from "../../typeorm/entities/user.entity";
+import { UserEntity } from "../../typeorm/entities/user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "src/auth/dto/create-user.dto";
 import { JwtTokenService } from "src/jwt-service/service/jwt.service";
@@ -19,7 +19,8 @@ import { UserDto } from "../dto/user.dto";
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
     private readonly jwtTokenServcie: JwtTokenService,
     @InjectRepository(Avatar) private avatarRepository: Repository<Avatar>,
     private readonly transactionService: TransactionService,
@@ -115,7 +116,7 @@ export class AuthService {
     }
   }
 
-  async createUser(userDto: CreateUserDto): Promise<User> {
+  async createUser(userDto: CreateUserDto): Promise<UserEntity> {
     const hashedPassword = await this.hashPassword(userDto.password);
     const user = this.userRepository.create({
       name: userDto.name,

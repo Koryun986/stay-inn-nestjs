@@ -1,5 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entity";
+import { UserEntity } from "./user.entity";
 
 @Entity()
 export class Avatar {
@@ -11,8 +11,8 @@ export class Avatar {
   @Column()
   avatar_url: string;
 
-  @OneToOne(() => User)
-  lodging: User;
+  @OneToOne(() => UserEntity)
+  user: UserEntity;
 
   @Column({
     type: "bigint",
