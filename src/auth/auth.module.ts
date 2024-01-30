@@ -7,13 +7,13 @@ import { JwtServiceModule } from "src/jwt-service/jwt-service.module";
 import { JwtService } from "@nestjs/jwt";
 import { TokenEntity } from "src/typeorm/entities/token.entity";
 import { ConfigService } from "@nestjs/config";
-import { Avatar } from "src/typeorm/entities/avatar.entity";
+import { AvatarEntity } from "src/typeorm/entities/avatar.entity";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity, TokenEntity, Avatar]),
+    TypeOrmModule.forFeature([UserEntity, TokenEntity, AvatarEntity]),
     JwtServiceModule,
   ],
   controllers: [AuthController],

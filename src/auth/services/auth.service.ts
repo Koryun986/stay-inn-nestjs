@@ -12,7 +12,7 @@ import { JwtTokenService } from "src/jwt-service/service/jwt.service";
 import { JwtTokens } from "src/jwt-service/types/jwt-token.type";
 import { LoginUserDto } from "../dto/login-user.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
-import { Avatar } from "src/typeorm/entities/avatar.entity";
+import { AvatarEntity } from "src/typeorm/entities/avatar.entity";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
 import { UserDto } from "../dto/user.dto";
 
@@ -22,7 +22,7 @@ export class AuthService {
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
     private readonly jwtTokenServcie: JwtTokenService,
-    @InjectRepository(Avatar) private avatarRepository: Repository<Avatar>,
+    @InjectRepository(AvatarEntity) private avatarRepository: Repository<AvatarEntity>,
     private readonly transactionService: TransactionService,
     private readonly cloudStorageService: CloudStorageService,
   ) {}
