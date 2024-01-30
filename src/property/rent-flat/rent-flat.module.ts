@@ -8,7 +8,7 @@ import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageModule } from "src/cloud-storage/cloud-storage.module";
-import { RentFlatImage } from "src/typeorm/entities/property/images/rent-flat-image.entity";
+import { RentFlatImageEntity } from "src/typeorm/entities/property/images/rent-flat-image.entity";
 import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
 
 @Module({
@@ -19,7 +19,7 @@ import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
       AddressEntity,
       FlatTag,
       HouseholdApplicances,
-      RentFlatImage,
+      RentFlatImageEntity,
     ]),
     CloudStorageModule,
   ],

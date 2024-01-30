@@ -9,7 +9,7 @@ import { HouseholdApplicances } from "src/typeorm/entities/property/tags/househo
 import { HouseholdAppliancesDto } from "src/property/dto/household-appliances.dto";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
-import { RentFlatImage } from "src/typeorm/entities/property/images/rent-flat-image.entity";
+import { RentFlatImageEntity } from "src/typeorm/entities/property/images/rent-flat-image.entity";
 import { CreateRentFlatServiceReturn } from "../types/create-rent-flat-return.type";
 import { FlatTagDto } from "../dto/flat-tag.dto";
 import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
@@ -25,8 +25,8 @@ export class RentFlatService {
     private readonly flatTagRepository: Repository<FlatTag>,
     @InjectRepository(HouseholdApplicances)
     private readonly householdApplicancesRepository: Repository<HouseholdApplicances>,
-    @InjectRepository(RentFlatImage)
-    private readonly rentFlatImageRepository: Repository<RentFlatImage>,
+    @InjectRepository(RentFlatImageEntity)
+    private readonly rentFlatImageRepository: Repository<RentFlatImageEntity>,
     private readonly transactionService: TransactionService,
     private readonly cloudStorageService: CloudStorageService,
   ) {}
