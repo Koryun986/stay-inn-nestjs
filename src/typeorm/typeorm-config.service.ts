@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { UserEntity } from "./entities/user.entity";
-import { Token } from "./entities/token.entity";
+import { TokenEntity } from "./entities/token.entity";
 import { Address } from "./entities/property/address.entity";
 import { Avatar } from "./entities/avatar.entity";
 
@@ -18,7 +18,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       username: this.configService.get("database.user"),
       password: this.configService.get<string>("database.password"),
       database: this.configService.get("database.name"),
-      entities: [UserEntity, Token, Avatar, Address],
+      entities: [UserEntity, TokenEntity, Avatar, Address],
       synchronize: this.configService.get<string>("env") !== "production",
     };
   }

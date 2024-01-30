@@ -8,7 +8,7 @@ import {
 import { UserEntity } from "./user.entity";
 
 @Entity()
-export class Token {
+export class TokenEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })

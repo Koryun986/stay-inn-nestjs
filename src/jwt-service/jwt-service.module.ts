@@ -4,7 +4,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { jwtConfig } from "./jwt-service.config";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Token } from "src/typeorm/entities/token.entity";
+import { TokenEntity } from "src/typeorm/entities/token.entity";
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { Token } from "src/typeorm/entities/token.entity";
       inject: [ConfigService],
       useFactory: jwtConfig,
     }),
-    TypeOrmModule.forFeature([Token]),
+    TypeOrmModule.forFeature([TokenEntity]),
   ],
   exports: [JwtTokenService],
   providers: [ConfigService, JwtTokenService],
