@@ -4,7 +4,7 @@ import { FurnitureEnum, RepairEnum } from "./enum/tag.enum";
 import { Furniture, Repair } from "./types/tag.type";
 
 @Entity()
-export class FlatTag {
+export class FlatTagEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })

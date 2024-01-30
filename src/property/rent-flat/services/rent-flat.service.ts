@@ -12,7 +12,7 @@ import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.se
 import { RentFlatImageEntity } from "src/typeorm/entities/property/images/rent-flat-image.entity";
 import { CreateRentFlatServiceReturn } from "../types/create-rent-flat-return.type";
 import { FlatTagDto } from "../dto/flat-tag.dto";
-import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
+import { FlatTagEntity } from "src/typeorm/entities/property/tags/flat-tag.entity";
 
 @Injectable()
 export class RentFlatService {
@@ -21,8 +21,8 @@ export class RentFlatService {
     private readonly rentFlatRepository: Repository<RentFlatEntity>,
     @InjectRepository(AddressEntity)
     private readonly addressRepository: Repository<AddressEntity>,
-    @InjectRepository(FlatTag)
-    private readonly flatTagRepository: Repository<FlatTag>,
+    @InjectRepository(FlatTagEntity)
+    private readonly flatTagRepository: Repository<FlatTagEntity>,
     @InjectRepository(HouseholdApplicances)
     private readonly householdApplicancesRepository: Repository<HouseholdApplicances>,
     @InjectRepository(RentFlatImageEntity)

@@ -9,7 +9,7 @@ import { HouseholdApplicances } from "src/typeorm/entities/property/tags/househo
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CloudStorageModule } from "src/cloud-storage/cloud-storage.module";
 import { RentFlatImageEntity } from "src/typeorm/entities/property/images/rent-flat-image.entity";
-import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
+import { FlatTagEntity } from "src/typeorm/entities/property/tags/flat-tag.entity";
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { FlatTag } from "src/typeorm/entities/property/tags/flat-tag.entity";
     TypeOrmModule.forFeature([
       RentFlatEntity,
       AddressEntity,
-      FlatTag,
+      FlatTagEntity,
       HouseholdApplicances,
       RentFlatImageEntity,
     ]),
