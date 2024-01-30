@@ -6,7 +6,7 @@ import { HouseTag } from "src/typeorm/entities/property/tags/house-tag.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CloudStorageModule } from "src/cloud-storage/cloud-storage.module";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
-import { RentHouseImage } from "src/typeorm/entities/property/images/rent-house-image.entity";
+import { RentHouseImageEntity } from "src/typeorm/entities/property/images/rent-house-image.entity";
 import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { Amenities } from "src/typeorm/entities/property/tags/amenities.entity";
@@ -23,7 +23,7 @@ import { TransactionService } from "src/database-transaction/transaction.service
       HouseholdApplicances,
       Amenities,
       Communication,
-      RentHouseImage,
+      RentHouseImageEntity,
     ]),
     CloudStorageModule,
   ],

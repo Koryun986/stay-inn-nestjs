@@ -2,7 +2,7 @@ import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { RentHouseEntity } from "../rent-house.entity";
 
 @Entity()
-export class RentHouseImage {
+export class RentHouseImageEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
