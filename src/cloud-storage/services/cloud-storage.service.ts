@@ -29,6 +29,21 @@ export class CloudStorageService {
     initializeApp(config);
     this.storage = getStorage();
   }
+  async uploadRentHouseImages(
+    files: Array<Express.Multer.File>,
+    userId: number,
+    rentHouseId: number,
+  ) {
+    try {
+      const folderName = `${this.configService.get<string>(
+        "firebase.storageRentHouseFolder",
+      )}/user_${userId}/rent_flat_${rentHouseId}`;
+      const downloadUrls = await this.uploadFilesToBucket(files, folderName);
+      return downloadUrls;
+    } catch (e) {
+      throw new Error("Can't upload files to Firebase Cloud Storage");
+    }
+  }
 
   async uploadRentFlatImages(
     files: Array<Express.Multer.File>,

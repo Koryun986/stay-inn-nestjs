@@ -31,5 +31,6 @@ export default () => ({
     measurementId: process.env.MEASUREMENT_ID,
     storageAvatarFolder: process.env.STORAGE_AVATAR_FOLDER,
     storageRentFlatFolder: process.env.STORAGE_RENT_FLAT_FOLDER,
+    storageRentHouseFolder: process.env.STORAGE_RENT_HOUSE_FOLDER,
   },
 });

@@ -2,17 +2,20 @@ import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HouseholdApplicances } from "./household-appliances.entity";
 import { Amenities } from "./amenities.entity";
 import { Communication } from "./communication.entity";
-import { Furniture, FurnitureEnum, Repair, RepairEnum } from "./enum/tag.enum";
-
-type HouseType = "Townhouse" | "House" | "Country House";
-type Condition = "Constructed" | "Unfinished";
-type BuildingType =
-  | "stone"
-  | "panel"
-  | "monolith"
-  | "brick"
-  | "cassette"
-  | "wooden";
+import {
+  BuildingTypeEnum,
+  ConditionTypeEnum,
+  FurnitureEnum,
+  HouseTypeEnum,
+  RepairEnum,
+} from "./enum/tag.enum";
+import {
+  BuildingType,
+  ConditionType,
+  Furniture,
+  HouseType,
+  Repair,
+} from "./types/tag.type";
 
 @Entity()
 export class HouseTag {
@@ -23,22 +26,33 @@ export class HouseTag {
 
   @Column({
     type: "enum",
-    enum: ["Townhouse", "House", "Country House"],
-    default: "House",
+    enum: [
+      HouseTypeEnum.House,
+      HouseTypeEnum.Townhouse,
+      HouseTypeEnum.CountryHouse,
+    ],
+    default: HouseTypeEnum.House,
   })
   type: HouseType;
 
   @Column({
     type: "enum",
-    enum: ["Constructed", "Unfinished"],
+    enum: [ConditionTypeEnum.Constructed, ConditionTypeEnum.Unfinished],
     default: "Constructed",
   })
-  condition: Condition;
+  condition: ConditionType;
 
   @Column({
     type: "enum",
-    enum: ["stone", "panel", "monolith", "brick", "cassette", "wooden"],
-    default: "stone",
+    enum: [
+      BuildingTypeEnum.Stone,
+      BuildingTypeEnum.Panel,
+      BuildingTypeEnum.Monolith,
+      BuildingTypeEnum.Brick,
+      BuildingTypeEnum.Cassette,
+      BuildingTypeEnum.Wooden,
+    ],
+    default: BuildingTypeEnum.Stone,
   })
   building_type: BuildingType;
 
