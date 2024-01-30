@@ -1,7 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HouseholdApplicances } from "./household-appliances.entity";
 import { AmenitiesEntity } from "./amenities.entity";
-import { Communication } from "./communication.entity";
+import { CommunicationEntity } from "./communication.entity";
 import {
   BuildingTypeEnum,
   ConditionTypeEnum,
@@ -119,8 +119,8 @@ export class HouseTag {
   })
   amenities_id: number;
 
-  @OneToOne(() => Communication)
-  communication: Communication;
+  @OneToOne(() => CommunicationEntity)
+  communication: CommunicationEntity;
 
   @Column({
     type: "bigint",

@@ -10,7 +10,7 @@ import { RentHouseImageEntity } from "src/typeorm/entities/property/images/rent-
 import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity";
 import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
-import { Communication } from "src/typeorm/entities/property/tags/communication.entity";
+import { CommunicationEntity } from "src/typeorm/entities/property/tags/communication.entity";
 import { TransactionService } from "src/database-transaction/transaction.service";
 
 @Module({
@@ -22,7 +22,7 @@ import { TransactionService } from "src/database-transaction/transaction.service
       HouseTag,
       HouseholdApplicances,
       AmenitiesEntity,
-      Communication,
+      CommunicationEntity,
       RentHouseImageEntity,
     ]),
     CloudStorageModule,
