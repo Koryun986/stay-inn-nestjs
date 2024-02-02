@@ -14,7 +14,7 @@ export class HouseholdApplicancesEntity {
   air_conditioner: boolean;
 
   @Column()
-  refrigator: boolean;
+  refrigerator: boolean;
 
   @Column()
   dishwasher: boolean;

@@ -1,0 +1,70 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AddressSchema {
+  building: String!
+  city: String!
+  country: String!
+  street: String!
+}
+
+type FlatTagSchema {
+  area: Float
+  balconies: Int!
+  bathrooms: Int!
+  ceiling_height: Float
+  elevator: Boolean!
+  floor: Int!
+  furniture: Furniture!
+  household_appliances: HouseholdAppliancesSchema!
+  repair: Repair!
+  rooms: Int!
+}
+
+enum Furniture {
+  ByAgreement
+  Exist
+  NotExist
+  PartialFurniture
+}
+
+type HouseholdAppliancesSchema {
+  air_conditioner: Boolean!
+  dishwasher: Boolean!
+  refrigerator: Boolean!
+  stove: Boolean!
+  tumble_dryer: Boolean!
+  washing_machine: Boolean!
+}
+
+type Query {
+  getRentFlats: [RentFlatSchema!]!
+}
+
+type RentFlatSchema {
+  address: AddressSchema!
+  currency: String!
+  description: String!
+  flat_tag: FlatTagSchema!
+  id: Int!
+  images: [String!]!
+  price: Int!
+  user: UserSchema!
+}
+
+enum Repair {
+  CosmeticRepair
+  DesignerStyle
+  EuroRenovated
+  OldRepair
+  PartialRepair
+  Reconstructed
+}
+
+type UserSchema {
+  avatar_url: String!
+  email: String!
+  id: Int!
+  name: String!
+}

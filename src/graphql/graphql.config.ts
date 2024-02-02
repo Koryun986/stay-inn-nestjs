@@ -7,10 +7,8 @@ import { join } from "path";
 export class GraphQLConfigService implements GqlOptionsFactory {
   createGqlOptions(): ApolloDriverConfig {
     return {
-      typePaths: ["src/graphql/schema/*.graphql"],
-      definitions: {
-        path: join(process.cwd(), "src/graphql/types/index.ts"),
-      },
+      autoSchemaFile: join(process.cwd(), "src/graphql/schema/schema.gql"),
+      sortSchema: true,
     };
   }
 }
