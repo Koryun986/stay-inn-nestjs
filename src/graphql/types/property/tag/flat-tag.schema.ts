@@ -27,11 +27,11 @@ registerEnumType(RepairEnum, {
 @ObjectType()
 export class FlatTagSchema
   implements
-    Omit<
-      FlatTagEntity,
-      "household_appliances_id" | "household_appliances" | "id"
-    >
+    Omit<FlatTagEntity, "household_appliances_id" | "household_appliances">
 {
+  @Field(() => Int)
+  id: number;
+
   @Field({ nullable: true })
   area?: number;
 

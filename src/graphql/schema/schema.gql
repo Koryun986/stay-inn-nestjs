@@ -18,6 +18,7 @@ type FlatTagSchema {
   floor: Int!
   furniture: Furniture!
   household_appliances: HouseholdAppliancesSchema!
+  id: Int!
   repair: Repair!
   rooms: Int!
 }
