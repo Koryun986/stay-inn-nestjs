@@ -32,7 +32,7 @@ export class FlatTagSchema
   @Field(() => Int)
   id: number;
 
-  @Field({ nullable: true })
+  @Field(() => Float, { nullable: true })
   area?: number;
 
   @Field((type) => Int)

@@ -57,10 +57,10 @@ export class HouseTagEntity {
   building_type: BuildingType;
 
   @Column()
-  area: number;
+  area?: number;
 
   @Column()
-  land_area: number;
+  land_area?: number;
 
   @Column()
   floors: number;
@@ -69,7 +69,7 @@ export class HouseTagEntity {
   rooms: number;
 
   @Column()
-  ceiling_height: number;
+  ceiling_height?: number;
 
   @Column()
   bathrooms: number;
