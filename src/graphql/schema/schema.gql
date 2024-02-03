@@ -1,0 +1,138 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AddressSchema {
+  building: String!
+  city: String!
+  country: String!
+  street: String!
+}
+
+type AmenitiesSchema {
+  barbecue_oven: Boolean!
+  fireplace: Boolean!
+  sauna: Boolean!
+  security_system: Boolean!
+  swimming_pool: Boolean!
+}
+
+enum BuildingType {
+  Brick
+  Cassette
+  Monolith
+  Panel
+  Stone
+  Wooden
+}
+
+type CommunicationSchema {
+  electricity: Boolean!
+  gas: Boolean!
+  sewerage: Boolean!
+  water_supply: Boolean!
+}
+
+enum ConditionType {
+  Constructed
+  Unfinished
+}
+
+type FlatTagSchema {
+  area: Float
+  balconies: Int!
+  bathrooms: Int!
+  ceiling_height: Float
+  elevator: Boolean!
+  floor: Int!
+  furniture: Furniture!
+  household_appliances: HouseholdAppliancesSchema!
+  id: Int!
+  repair: Repair!
+  rooms: Int!
+}
+
+enum Furniture {
+  ByAgreement
+  Exist
+  NotExist
+  PartialFurniture
+}
+
+type HouseTagSchema {
+  amenities: AmenitiesSchema!
+  area: Float
+  bathrooms: Int!
+  building_type: BuildingType!
+  ceiling_height: Float
+  communication: CommunicationSchema!
+  condition: ConditionType!
+  floors: Int!
+  furniture: Furniture!
+  garage: Int!
+  household_appliances: HouseholdAppliancesSchema!
+  id: Int!
+  land_area: Float
+  repair: Repair!
+  rooms: Int!
+  type: HouseType!
+}
+
+enum HouseType {
+  CountryHouse
+  House
+  Townhouse
+}
+
+type HouseholdAppliancesSchema {
+  air_conditioner: Boolean!
+  dishwasher: Boolean!
+  refrigerator: Boolean!
+  stove: Boolean!
+  tumble_dryer: Boolean!
+  washing_machine: Boolean!
+}
+
+type Query {
+  getRentFlats: [RentFlatSchema!]!
+  getRentHouses: [RentHouseSchema!]!
+}
+
+type RentFlatSchema {
+  address: AddressSchema!
+  currency: String!
+  description: String!
+  flat_tag: FlatTagSchema!
+  id: Int!
+  images: [String!]!
+  price: Int!
+  user: UserSchema!
+}
+
+type RentHouseSchema {
+  address: AddressSchema!
+  currency: String!
+  description: String!
+  flat_tag: HouseTagSchema!
+  house_tag: HouseTagSchema!
+  id: Int!
+  images: [String!]!
+  price: Int!
+  user: UserSchema!
+}
+
+enum Repair {
+  CosmeticRepair
+  DesignerStyle
+  EuroRenovated
+  OldRepair
+  PartialRepair
+  Reconstructed
+}
+
+type UserSchema {
+  avatar_url: String!
+  email: String!
+  id: Int!
+  name: String!
+}

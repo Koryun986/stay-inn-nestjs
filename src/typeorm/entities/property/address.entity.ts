@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Address {
+export class AddressEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })

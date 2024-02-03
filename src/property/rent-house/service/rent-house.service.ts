@@ -1,14 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { CreateRentHouseDto } from "../dto/create-rent-house.dto";
 import { InjectRepository } from "@nestjs/typeorm";
-import { RentHouse } from "src/typeorm/entities/property/rent-house.entity";
+import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity";
 import { Repository } from "typeorm";
-import { Address } from "src/typeorm/entities/property/address.entity";
-import { HouseTag } from "src/typeorm/entities/property/tags/house-tag.entity";
-import { HouseholdApplicances } from "src/typeorm/entities/property/tags/household-appliances.entity";
-import { Amenities } from "src/typeorm/entities/property/tags/amenities.entity";
-import { Communication } from "src/typeorm/entities/property/tags/communication.entity";
-import { RentHouseImage } from "src/typeorm/entities/property/images/rent-house-image.entity";
+import { AddressEntity } from "src/typeorm/entities/property/address.entity";
+import { HouseTagEntity } from "src/typeorm/entities/property/tags/house-tag.entity";
+import { HouseholdApplicancesEntity } from "src/typeorm/entities/property/tags/household-appliances.entity";
+import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
+import { CommunicationEntity } from "src/typeorm/entities/property/tags/communication.entity";
+import { RentHouseImageEntity } from "src/typeorm/entities/property/images/rent-house-image.entity";
 import { CloudStorageService } from "src/cloud-storage/services/cloud-storage.service";
 import { TransactionService } from "src/database-transaction/transaction.service";
 import { CommunicationDto } from "src/property/dto/communication.dto";
@@ -20,20 +20,20 @@ import { CreateRentHouseServiceReturn } from "../types/create-rent-house-return.
 @Injectable()
 export class RentHouseService {
   constructor(
-    @InjectRepository(RentHouse)
-    private readonly rentHouseRepository: Repository<RentHouse>,
-    @InjectRepository(Address)
-    private readonly addressRepository: Repository<Address>,
-    @InjectRepository(HouseTag)
-    private readonly houseTagRepository: Repository<HouseTag>,
-    @InjectRepository(HouseholdApplicances)
-    private readonly householdAppliancesRepository: Repository<HouseholdApplicances>,
-    @InjectRepository(Amenities)
-    private readonly amenitiesRepository: Repository<Amenities>,
-    @InjectRepository(Communication)
-    private readonly communicationRepository: Repository<Communication>,
-    @InjectRepository(RentHouseImage)
-    private readonly rentHouseImageRepository: Repository<RentHouseImage>,
+    @InjectRepository(RentHouseEntity)
+    private readonly rentHouseRepository: Repository<RentHouseEntity>,
+    @InjectRepository(AddressEntity)
+    private readonly addressRepository: Repository<AddressEntity>,
+    @InjectRepository(HouseTagEntity)
+    private readonly houseTagRepository: Repository<HouseTagEntity>,
+    @InjectRepository(HouseholdApplicancesEntity)
+    private readonly householdAppliancesRepository: Repository<HouseholdApplicancesEntity>,
+    @InjectRepository(AmenitiesEntity)
+    private readonly amenitiesRepository: Repository<AmenitiesEntity>,
+    @InjectRepository(CommunicationEntity)
+    private readonly communicationRepository: Repository<CommunicationEntity>,
+    @InjectRepository(RentHouseImageEntity)
+    private readonly rentHouseImageRepository: Repository<RentHouseImageEntity>,
 
     private readonly transactionService: TransactionService,
     private readonly cloudStorageService: CloudStorageService,

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Communication {
+export class CommunicationEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })

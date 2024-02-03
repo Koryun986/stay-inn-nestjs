@@ -1,15 +1,13 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { User } from "./user.entity";
-import { bigint } from "zod";
+import { UserEntity } from "./user.entity";
 
 @Entity()
-export class Token {
+export class TokenEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
@@ -25,9 +23,8 @@ export class Token {
   })
   expiration: Date;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  user: User;
+  @OneToOne(() => UserEntity)
+  user: UserEntity;
 
   @Column({
     type: "bigint",

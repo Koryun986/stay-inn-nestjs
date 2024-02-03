@@ -1,10 +1,10 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { HouseholdApplicances } from "./household-appliances.entity";
+import { HouseholdApplicancesEntity } from "./household-appliances.entity";
 import { FurnitureEnum, RepairEnum } from "./enum/tag.enum";
 import { Furniture, Repair } from "./types/tag.type";
 
 @Entity()
-export class FlatTag {
+export class FlatTagEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
@@ -57,8 +57,8 @@ export class FlatTag {
   @Column()
   elevator: boolean;
 
-  @OneToOne(() => HouseholdApplicances)
-  household_appliances: HouseholdApplicances;
+  @OneToOne(() => HouseholdApplicancesEntity)
+  household_appliances: HouseholdApplicancesEntity;
 
   @Column({
     type: "bigint",

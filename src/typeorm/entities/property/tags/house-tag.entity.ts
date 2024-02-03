@@ -1,7 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { HouseholdApplicances } from "./household-appliances.entity";
-import { Amenities } from "./amenities.entity";
-import { Communication } from "./communication.entity";
+import { HouseholdApplicancesEntity } from "./household-appliances.entity";
+import { AmenitiesEntity } from "./amenities.entity";
+import { CommunicationEntity } from "./communication.entity";
 import {
   BuildingTypeEnum,
   ConditionTypeEnum,
@@ -18,7 +18,7 @@ import {
 } from "./types/tag.type";
 
 @Entity()
-export class HouseTag {
+export class HouseTagEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
@@ -57,10 +57,10 @@ export class HouseTag {
   building_type: BuildingType;
 
   @Column()
-  area: number;
+  area?: number;
 
   @Column()
-  land_area: number;
+  land_area?: number;
 
   @Column()
   floors: number;
@@ -69,7 +69,7 @@ export class HouseTag {
   rooms: number;
 
   @Column()
-  ceiling_height: number;
+  ceiling_height?: number;
 
   @Column()
   bathrooms: number;
@@ -103,24 +103,24 @@ export class HouseTag {
   })
   repair: Repair;
 
-  @OneToOne(() => HouseholdApplicances)
-  household_appliances: HouseholdApplicances;
+  @OneToOne(() => HouseholdApplicancesEntity)
+  household_appliances: HouseholdApplicancesEntity;
 
   @Column({
     type: "bigint",
   })
   household_appliances_id: number;
 
-  @OneToOne(() => Amenities)
-  amenities: Amenities;
+  @OneToOne(() => AmenitiesEntity)
+  amenities: AmenitiesEntity;
 
   @Column({
     type: "bigint",
   })
   amenities_id: number;
 
-  @OneToOne(() => Communication)
-  communication: Communication;
+  @OneToOne(() => CommunicationEntity)
+  communication: CommunicationEntity;
 
   @Column({
     type: "bigint",

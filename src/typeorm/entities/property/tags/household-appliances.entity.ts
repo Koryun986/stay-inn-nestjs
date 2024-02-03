@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class HouseholdApplicances {
+export class HouseholdApplicancesEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
@@ -14,7 +14,7 @@ export class HouseholdApplicances {
   air_conditioner: boolean;
 
   @Column()
-  refrigator: boolean;
+  refrigerator: boolean;
 
   @Column()
   dishwasher: boolean;

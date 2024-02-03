@@ -1,10 +1,10 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "../user.entity";
-import { Address } from "./address.entity";
-import { HouseTag } from "./tags/house-tag.entity";
+import { UserEntity } from "../user.entity";
+import { AddressEntity } from "./address.entity";
+import { HouseTagEntity } from "./tags/house-tag.entity";
 
 @Entity()
-export class RentHouse {
+export class RentHouseEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
@@ -21,24 +21,24 @@ export class RentHouse {
   })
   description: string;
 
-  @OneToOne(() => User)
-  user: User;
+  @OneToOne(() => UserEntity)
+  user: UserEntity;
 
   @Column({
     type: "bigint",
   })
   user_id: number;
 
-  @OneToOne(() => Address)
-  address: Address;
+  @OneToOne(() => AddressEntity)
+  address: AddressEntity;
 
   @Column({
     type: "bigint",
   })
   address_id: number;
 
-  @OneToOne(() => HouseTag)
-  house_tag: HouseTag;
+  @OneToOne(() => HouseTagEntity)
+  house_tag: HouseTagEntity;
 
   @Column({
     type: "bigint",

@@ -1,8 +1,8 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { RentFlat } from "../rent-flat.entity";
+import { RentFlatEntity } from "../rent-flat.entity";
 
 @Entity()
-export class RentFlatImage {
+export class RentFlatImageEntity {
   @PrimaryGeneratedColumn({
     type: "bigint",
   })
@@ -11,8 +11,8 @@ export class RentFlatImage {
   @Column()
   image_url: string;
 
-  @OneToOne(() => RentFlat)
-  rent_flat: RentFlat;
+  @OneToOne(() => RentFlatEntity)
+  rent_flat: RentFlatEntity;
 
   @Column()
   rent_flat_id: number;

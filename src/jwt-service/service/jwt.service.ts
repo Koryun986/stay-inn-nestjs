@@ -10,7 +10,7 @@ import { add, isFuture, isPast } from "date-fns";
 import { UserDto } from "src/auth/dto/user.dto";
 import { JwtTokens } from "src/jwt-service/types/jwt-token.type";
 import { JwtVerificationResult } from "src/jwt-service/types/jwt-verication.type";
-import { Token } from "src/typeorm/entities/token.entity";
+import { TokenEntity } from "src/typeorm/entities/token.entity";
 import { Repository } from "typeorm";
 import { v4 } from "uuid";
 
@@ -18,8 +18,8 @@ import { v4 } from "uuid";
 export class JwtTokenService {
   constructor(
     private readonly jwtService: JwtService,
-    @InjectRepository(Token)
-    private readonly tokenRepository: Repository<Token>,
+    @InjectRepository(TokenEntity)
+    private readonly tokenRepository: Repository<TokenEntity>,
     private readonly configService: ConfigService,
   ) {}
 
@@ -58,13 +58,13 @@ export class JwtTokenService {
     return token;
   }
 
-  async getRefreshTokenFromUser(user: UserDto): Promise<Token> {
+  async getRefreshTokenFromUser(user: UserDto): Promise<TokenEntity> {
     return await this.tokenRepository.findOneBy({
       user_id: user.id,
     });
   }
 
-  async isValideRefreshToken(token: Token): Promise<boolean> {
+  async isValideRefreshToken(token: TokenEntity): Promise<boolean> {
     return isFuture(Date.parse(token.expiration.toString()));
   }
 
