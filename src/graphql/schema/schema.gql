@@ -9,6 +9,35 @@ type AddressSchema {
   street: String!
 }
 
+type AmenitiesSchema {
+  barbecue_oven: Boolean!
+  fireplace: Boolean!
+  sauna: Boolean!
+  security_system: Boolean!
+  swimming_pool: Boolean!
+}
+
+enum BuildingType {
+  Brick
+  Cassette
+  Monolith
+  Panel
+  Stone
+  Wooden
+}
+
+type CommunicationSchema {
+  electricity: Boolean!
+  gas: Boolean!
+  sewerage: Boolean!
+  water_supply: Boolean!
+}
+
+enum ConditionType {
+  Constructed
+  Unfinished
+}
+
 type FlatTagSchema {
   area: Float
   balconies: Int!
@@ -30,6 +59,31 @@ enum Furniture {
   PartialFurniture
 }
 
+type HouseTagSchema {
+  amenities: AmenitiesSchema!
+  area: Float
+  bathrooms: Int!
+  building_type: BuildingType!
+  ceiling_height: Float
+  communication: CommunicationSchema!
+  condition: ConditionType!
+  floors: Int!
+  furniture: Furniture!
+  garage: Int!
+  household_appliances: HouseholdAppliancesSchema!
+  id: Int!
+  land_area: Float
+  repair: Repair!
+  rooms: Int!
+  type: HouseType!
+}
+
+enum HouseType {
+  CountryHouse
+  House
+  Townhouse
+}
+
 type HouseholdAppliancesSchema {
   air_conditioner: Boolean!
   dishwasher: Boolean!
@@ -41,6 +95,7 @@ type HouseholdAppliancesSchema {
 
 type Query {
   getRentFlats: [RentFlatSchema!]!
+  getRentHouses: [RentHouseSchema!]!
 }
 
 type RentFlatSchema {
@@ -48,6 +103,18 @@ type RentFlatSchema {
   currency: String!
   description: String!
   flat_tag: FlatTagSchema!
+  id: Int!
+  images: [String!]!
+  price: Int!
+  user: UserSchema!
+}
+
+type RentHouseSchema {
+  address: AddressSchema!
+  currency: String!
+  description: String!
+  flat_tag: HouseTagSchema!
+  house_tag: HouseTagSchema!
   id: Int!
   images: [String!]!
   price: Int!

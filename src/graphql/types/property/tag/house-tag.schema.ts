@@ -5,8 +5,6 @@ import {
   ObjectType,
   registerEnumType,
 } from "@nestjs/graphql";
-import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
-import { CommunicationEntity } from "src/typeorm/entities/property/tags/communication.entity";
 import {
   BuildingTypeEnum,
   ConditionTypeEnum,
@@ -15,7 +13,6 @@ import {
   RepairEnum,
 } from "src/typeorm/entities/property/tags/enum/tag.enum";
 import { HouseTagEntity } from "src/typeorm/entities/property/tags/house-tag.entity";
-import { HouseholdApplicancesEntity } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import {
   HouseType,
   ConditionType,
@@ -89,9 +86,6 @@ export class HouseTagSchema
 
   @Field(() => Int)
   bathrooms: number;
-
-  @Field(() => Int)
-  balconies: number;
 
   @Field(() => FurnitureEnum)
   furniture: Furniture;

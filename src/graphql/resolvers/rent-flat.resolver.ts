@@ -2,7 +2,6 @@ import { Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { InjectRepository } from "@nestjs/typeorm";
 import { RentFlatEntity } from "src/typeorm/entities/property/rent-flat.entity";
 import { FlatTagEntity } from "src/typeorm/entities/property/tags/flat-tag.entity";
-import { HouseholdApplicancesEntity } from "src/typeorm/entities/property/tags/household-appliances.entity";
 import { UserEntity } from "src/typeorm/entities/user.entity";
 import { Repository } from "typeorm";
 import { RentFlatSchema } from "../types/property/rent-flat.schema";
@@ -11,7 +10,6 @@ import { AvatarEntity } from "src/typeorm/entities/avatar.entity";
 import { UserSchema } from "../types/auth/user.schema";
 import { AddressSchema } from "../types/property/address.schema";
 import { FlatTagSchema } from "../types/property/tag/flat-tag.schema";
-import { HouseholdAppliancesSchema } from "../types/property/tag/household-appliances.schema";
 
 @Resolver(() => RentFlatSchema)
 export class RentFlatResolver {
@@ -20,8 +18,6 @@ export class RentFlatResolver {
     private readonly rentFlatRepository: Repository<RentFlatEntity>,
     @InjectRepository(FlatTagEntity)
     private readonly flatTagRepository: Repository<FlatTagEntity>,
-    @InjectRepository(HouseholdApplicancesEntity)
-    private readonly householdApplicancesRepository: Repository<HouseholdApplicancesEntity>,
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(AvatarEntity)

@@ -8,6 +8,11 @@ import { RentFlatResolver } from "./resolvers/rent-flat.resolver";
 import { AddressEntity } from "src/typeorm/entities/property/address.entity";
 import { AvatarEntity } from "src/typeorm/entities/avatar.entity";
 import { FlatTagResolver } from "./resolvers/tag/flat-tag.resolver";
+import { RentHouseResolver } from "./resolvers/rent-house.resolver";
+import { RentHouseEntity } from "src/typeorm/entities/property/rent-house.entity";
+import { HouseTagEntity } from "src/typeorm/entities/property/tags/house-tag.entity";
+import { AmenitiesEntity } from "src/typeorm/entities/property/tags/amenities.entity";
+import { CommunicationEntity } from "src/typeorm/entities/property/tags/communication.entity";
 
 @Module({
   imports: [
@@ -18,8 +23,12 @@ import { FlatTagResolver } from "./resolvers/tag/flat-tag.resolver";
       FlatTagEntity,
       HouseholdApplicancesEntity,
       AddressEntity,
+      RentHouseEntity,
+      HouseTagEntity,
+      AmenitiesEntity,
+      CommunicationEntity,
     ]),
   ],
-  providers: [RentFlatResolver, FlatTagResolver],
+  providers: [RentFlatResolver, FlatTagResolver, RentHouseResolver],
 })
 export class GraphQLResolverModule {}
